@@ -1,0 +1,33 @@
+{% extends 'voluntarios/base.html' %}
+
+{% block title %}Inicio - Gestión de Voluntarios{% endblock %}
+
+{% block content %}
+<div class="jumbotron">
+    <h1 class="display-4">Bienvenido al Sistema de Gestión de Voluntarios</h1>
+    <p class="lead">Administra voluntarios y eventos de manera eficiente.</p>
+    <hr class="my-4">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Voluntarios</h5>
+                    <p class="card-text">Gestiona el registro de voluntarios.</p>
+                    <a href="{% url 'lista_voluntarios' %}" class="btn btn-primary">Ver Voluntarios</a>
+                    <a href="{% url 'crear_voluntario' %}" class="btn btn-success">Nuevo Voluntario</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Eventos</h5>
+                    <p class="card-text">Organiza eventos comunitarios.</p>
+                    <a href="{% url 'lista_eventos' %}" class="btn btn-primary">Ver Eventos</a>
+                    <a href="{% url 'crear_evento' %}" class="btn btn-success">Nuevo Evento</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

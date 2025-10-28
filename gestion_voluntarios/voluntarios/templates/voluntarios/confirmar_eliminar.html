@@ -1,0 +1,31 @@
+{% extends 'voluntarios/base.html' %}
+
+{% block title %}Confirmar Eliminación{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title">Confirmar Eliminación</h2>
+                <p>¿Está seguro que desea eliminar este {{ tipo }}?</p>
+                
+                <div class="alert alert-warning">
+                    <strong>{{ objeto }}</strong>
+                    {% if tipo == 'evento' %}
+                        <br>Fecha: {{ objeto.fecha|date:"d/m/Y" }}
+                        <br>Voluntarios asignados: {{ objeto.voluntarios.count }}
+                    {% endif %}
+                </div>
+                
+                <form method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Sí, Eliminar</button>
+                    <a href="{% if tipo == 'voluntario' %}{% url 'lista_voluntarios' %}{% else %}{% url 'lista_eventos' %}{% endif %}" 
+                       class="btn btn-secondary">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

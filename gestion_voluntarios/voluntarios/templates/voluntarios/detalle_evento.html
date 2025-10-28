@@ -1,0 +1,41 @@
+{% extends 'voluntarios/base.html' %}
+
+{% block title %}{{ evento.titulo }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <h2>{{ evento.titulo }}</h2>
+        
+        <div class="card mb-4">
+            <div class="card-body">
+                <p class="card-text">{{ evento.descripcion }}</p>
+                <p><strong>Fecha:</strong> {{ evento.fecha|date:"d/m/Y" }}</p>
+                
+                <h4 class="mt-4">Voluntarios Asignados ({{ evento.voluntarios.count }})</h4>
+                
+                {% if evento.voluntarios.all %}
+                <ul class="list-group">
+                    {% for voluntario in evento.voluntarios.all %}
+                    <li class="list-group-item">
+                        {{ voluntario.nombre }} - {{ voluntario.email }}
+                        {% if voluntario.telefono %}
+                            - Tel: {{ voluntario.telefono }}
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p class="text-muted">No hay voluntarios asignados a este evento.</p>
+                {% endif %}
+                
+                <div class="mt-3">
+                    <a href="{% url 'editar_evento' evento.pk %}" class="btn btn-warning">Editar</a>
+                    <a href="{% url 'eliminar_evento' evento.pk %}" class="btn btn-danger">Eliminar</a>
+                    <a href="{% url 'lista_eventos' %}" class="btn btn-secondary">Volver a la lista</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
